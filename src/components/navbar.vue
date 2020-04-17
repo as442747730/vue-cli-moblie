@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { goTo, changeUrl } from 'utils/changeUrl'
 export default {
     async created() {
 
@@ -18,8 +17,7 @@ export default {
     },
     methods: {
         onClickLeft () {
-            // goTo(-1)
-            changeUrl('/')
+            this.$router.push('/')
         }
     }
 };
