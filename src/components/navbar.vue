@@ -18,8 +18,7 @@ export default {
     },
     methods: {
         onClickLeft () {
-            // goTo(-1)
-            changeUrl('/')
+            this.$router.go(-1)
         }
     }
 };

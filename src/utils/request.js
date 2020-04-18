@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 import store from 'store/index'
 import { Toast } from 'vant'
-axios.defaults.timeout = 12000 // 请求超时时间
+axios.defaults.timeout = 5000 // 请求超时时间
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 
 axios.defaults.headers.post['Content-Type'] =
