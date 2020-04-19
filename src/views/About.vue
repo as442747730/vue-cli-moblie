@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <Navbars v-if="$route.meta.navbar" ></Navbars>
+        <!-- <Navbars v-if="$route.meta.navbar" ></Navbars> -->
         <div id="nav">
             <router-link to="/">Home</router-link>|
             <router-link to="/about">About</router-link>
@@ -24,12 +24,12 @@
 
 <script>
 import { mapState } from 'vuex';
-import Navbars from 'components/navbar.vue';
+// import Navbars from 'components/navbar.vue';
 export default {
     name: 'about',
-    components: {
-        Navbars
-    },
+    // components: {
+    //     Navbars
+    // },
     props: {
         msg: String
     },

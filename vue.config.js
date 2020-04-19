@@ -38,11 +38,13 @@ const cdn = {
 }
 
 module.exports = {
+    // 解决白屏问题
+    transpileDependencies: ['webpack-dev-server/client'],
     // 项目部署的基础路径 默认/
     // 放在子目录时使用./或者加你的域名
     publicPath: process.env.BASE_URL,
     outputDir: 'dist',
-    assetsDir: 'static',
+    assetsDir: 'static', // 相对于outputDir的静态资源(js、css、img、fonts)目录
     indexPath: 'index.html',
     configureWebpack: config => {
         if (isProduction) {
@@ -97,6 +99,14 @@ module.exports = {
         //     }
         //     return args
         // })
+        config.entry.app = ['babel-polyfill', './src/main.js'];
+        // 修复HMR
+        config.resolve.symlinks(true);
+        // 修复 Lazy loading routes Error
+        config.plugin('html').tap(args => {
+            args[0].chunksSortMode = 'none';
+            return args;
+        });
         // 设置目录别名alias
         config.resolve.alias
             .set('assets', '@/assets')
@@ -106,7 +116,19 @@ module.exports = {
             .set('api', '@/api')
             .set('store', '@/store')
             .set('layouts', '@/layouts')
-            .set('utils', '@/utils')
+            .set('utils', '@/utils');
+        // 压缩图片
+        // config.module
+        //     .rule('images')
+        //     .use('image-webpack-loader')
+        //     .loader('image-webpack-loader')
+        //     .options({
+        //         mozjpeg: { progressive: true, quality: 65 },
+        //         optipng: { enabled: false },
+        //         pngquant: { quality: '65-90', speed: 4 },
+        //         gifsicle: { interlaced: false },
+        //         webp: { quality: 75 }
+        //     });
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
@@ -118,18 +140,18 @@ module.exports = {
         modules: false,
         loaderOptions: {
             postcss: {
-                // 这是rem适配的配置
+                // 这是rem适配的配置 需要单独配置在postcss.config才生效
                 plugins: [
-                    require('postcss-px2rem')({
-                        remUnit: 100
-                    }),
-                    require('autoprefixer')({
-                        browsers: [
-                            'last 4 versions',
-                            'ios >= 7',
-                            'android >= 4.1'
-                        ]
-                    })
+                    // require('postcss-px2rem')({
+                    //     remUnit: 100
+                    // }),
+                    // require('autoprefixer')({
+                    //     browsers: [
+                    //         'last 4 versions',
+                    //         'ios >= 7',
+                    //         'android >= 4.1'
+                    //     ]
+                    // })
                 ]
             },
             sass: {
@@ -137,6 +159,7 @@ module.exports = {
             }
         }
     },
+    // eslint-loader 是否在保存的时候检查
     lintOnSave: true, // default false
     // 打包时不生成.map文件
     productionSourceMap: false,

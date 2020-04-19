@@ -42,7 +42,7 @@ export default {
             // }
             setTimeout(() => {
                 const redirect = data.$route.query.redirect || '/about';
-                data.$router.replace({
+                data.$router.push({
                     path: redirect
                 })
             }, 1000);
