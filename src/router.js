@@ -13,8 +13,7 @@ const router = new Router({
             redirect: '/login',
             meta: {
                 auth: false, // 是否需要登录
-                keepAlive: false, // 是否缓存组件
-                navbar: false // 是否展示头部导航
+                keepAlive: false // 是否缓存组件
             }
         },
         {
@@ -25,7 +24,7 @@ const router = new Router({
             meta: {
                 auth: false,
                 keepAlive: false,
-                navbar: true
+                layout: 'default' // 是否展示头部导航
             }
         },
         {

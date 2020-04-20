@@ -1,30 +1,32 @@
 <template>
     <div id="app">
-        <HeadNav v-if="$route.meta.navbar" ></HeadNav>
         <transition :name="transitionName">
             <keep-alive>
-                <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
+                <component :is="layout">
+                    <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
+                </component>
             </keep-alive>
         </transition>
         <transition :name="transitionName">
             <router-view v-if="!$route.meta.keepAlive" class="router"></router-view>
         </transition>
-        <Tabbar v-if="$route.meta.navbar"></Tabbar>
     </div>
 </template>
 
 <script>
-import HeadNav from './components/layout/Navbar';
-import Tabbar from './components/layout/Tabbar';
 export default {
     name: 'app',
-    components: {
-        HeadNav,
-        Tabbar
+    data() {
+        return {
+            dafault_layout: 'default'
+        }
     },
     computed: {
         transitionName() {
             return this.$store.state.direction
+        },
+        layout() {
+            return (this.$route.meta.layout || this.default_layout) + '-layout'
         }
     }
 };
