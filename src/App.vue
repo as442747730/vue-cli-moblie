@@ -9,15 +9,18 @@
         <transition :name="transitionName">
             <router-view v-if="!$route.meta.keepAlive" class="router"></router-view>
         </transition>
+        <Tabbar v-if="$route.meta.navbar"></Tabbar>
     </div>
 </template>
 
 <script>
 import HeadNav from './components/layout/Navbar';
+import Tabbar from './components/layout/Tabbar';
 export default {
     name: 'app',
     components: {
-        HeadNav
+        HeadNav,
+        Tabbar
     },
     computed: {
         transitionName() {

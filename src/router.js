@@ -8,8 +8,9 @@ const router = new Router({
     routes: [
         {
             path: '/',
-            name: 'login',
-            component: login,
+            name: '/',
+            // component: login,
+            redirect: '/login',
             meta: {
                 auth: false, // 是否需要登录
                 keepAlive: false, // 是否缓存组件
