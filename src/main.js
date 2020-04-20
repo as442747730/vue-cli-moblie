@@ -5,6 +5,9 @@ import store from './store/index'
 import filters from './utils/filterstime'
 import Vant from 'vant';
 import 'vant/lib/index.css';
+import '@babel/polyfill';
+import Es6Promise from 'es6-promise'
+Es6Promise.polyfill()
 
 Vue.use(Vant);
 // 注入全局过滤器

@@ -1,15 +1,16 @@
 <template>
   <section class="login">
     <div class="top">您好，请登录</div>
-    <!-- <div class="list">
-      <van-cell-group>
+    <div class="list">
         <van-field
+          class="usern"
           v-model="username"
           left-icon="contact"
           placeholder="请输入账号"
           clearable
         />
         <van-field
+          class="usern"
           v-model="password"
           :type="passwordShow ? '' : 'password'"
           placeholder="请输入密码"
@@ -18,35 +19,12 @@
           @click-right-icon ="onClickIcon"
           clearable
         />
-      </van-cell-group>
-    </div> -->
-    <div class="list">
-      <van-form @submit="loginBtn">
-        <van-field
-          v-model="username"
-          left-icon="contact"
-          clearable
-          label="用户名"
-          placeholder="请输入用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
-        />
-        <van-field
-          v-model="password"
-          :type="passwordShow ? '' : 'password'"
-          placeholder="请输入密码"
-          left-icon="bag-o"
-          :right-icon="passwordShow ? 'closed-eye' : 'eye-o' "
-          @click-right-icon ="onClickIcon"
-          clearable
-          label="密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
-        <div style="margin: 16px;">
-          <van-button round block type="info" native-type="submit">
-            提交
-          </van-button>
-        </div>
-      </van-form>
+      <div class="list2">
+        <van-checkbox v-model="memory" >记住账号</van-checkbox>
+      </div>
+      <div>
+        <van-button @click="loginBtn" :disabled="disabledtype" color="#f57a00" size="normal" clearable >登录</van-button>
+      </div>
     </div>
   </section>
 </template>
@@ -58,22 +36,19 @@ export default {
     name: 'login',
     data() {
         return {
-            username: '',
+            username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
             password: '',
             passwordShow: false,
-            disabledtype: true
+            memory: true
         };
     },
     components: {},
     created() {},
     mounted() {},
-    watch: {
-        // 'username': function(newVal) {
-        //     this.disabledtype = this.username === ''
-        // },
-        // 'password': function(newVal) {
-        //     this.disabledtype = this.password === ''
-        // }
+    computed: {
+        disabledtype () {
+            return this.username === '' || this.password === ''
+        }
     },
     methods: {
         ...mapActions('login', ['login']),
@@ -81,7 +56,7 @@ export default {
             this.passwordShow = !this.passwordShow
         },
         loginBtn() {
-            if (this.username === '1' || this.password === '1') {
+            if (this.username === '' || this.password === '') {
                 Toast({
                     message: '请输入账号或密码',
                     position: 'middle',
@@ -102,18 +77,17 @@ export default {
 <style scoped lang="scss">
 .login {
   .top {
-    @include line-height(345px, 345px);
-    font-size: 60px;
+    @include line-height(220px, 220px);
+    font-size: 20px;
     padding-left: 45px;
     text-align: left;
   }
   .list {
-    height: 100px;
-    margin: 0 45px 4px 45px;
+    margin: 0 45px 8px 45px;
   }
-  /deep/ .van-field {
-    font-size: 30px;
-    line-height: 42px;
+  .list2 {
+    margin: 8px 0 0 16px;
+    font-size: 12px;
   }
 }
 </style>

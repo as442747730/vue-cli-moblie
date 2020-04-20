@@ -10,14 +10,15 @@
 
 <script>
 export default {
-    async created() {
+    name: 'HeadNav',
+    created() {
 
     },
     mounted() {
     },
     methods: {
         onClickLeft () {
-            this.$router.push('/')
+            this.$router.go(-1)
         }
     }
 };

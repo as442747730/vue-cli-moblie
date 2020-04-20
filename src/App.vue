@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <HeadNav v-if="$route.meta.navbar" ></HeadNav>
         <transition :name="transitionName">
             <keep-alive>
                 <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
@@ -12,9 +13,12 @@
 </template>
 
 <script>
-
+import HeadNav from './components/layout/Navbar';
 export default {
     name: 'app',
+    components: {
+        HeadNav
+    },
     computed: {
         transitionName() {
             return this.$store.state.direction
