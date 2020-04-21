@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from './views/login.vue'
 import store from 'store/index'
 Vue.use(Router)
 const router = new Router({
@@ -9,7 +8,6 @@ const router = new Router({
         {
             path: '/',
             name: '/',
-            // component: login,
             redirect: '/login',
             meta: {
                 auth: false, // 是否需要登录
@@ -24,7 +22,7 @@ const router = new Router({
             meta: {
                 auth: false,
                 keepAlive: false,
-                layout: 'default' // 是否展示头部导航
+                all: true
             }
         },
         {
@@ -34,7 +32,8 @@ const router = new Router({
                 import(/* webpackChunkName: "login" */ './views/login.vue'),
             meta: {
                 auth: false,
-                keepAlive: true
+                keepAlive: false,
+                noall: true
             }
         },
         {

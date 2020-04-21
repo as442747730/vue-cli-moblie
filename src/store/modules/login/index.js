@@ -1,5 +1,5 @@
 import * as type from './mutations_types'
-// import { login } from 'api/index'
+import { UsersApi } from 'api/index'
 // import { Toast } from 'vant';
 export default {
     namespaced: true,
@@ -19,6 +19,24 @@ export default {
 
     },
     actions: {
+        /* 两种方式都可以 */
+        // async Performllogin (state, res) {
+        //     const { code, data } = await UsersApi.Performllogin(
+        //         {
+        //             username: res.username,
+        //             password: res.password
+        //         }
+        //     )
+        //     if (code === 200) {
+        //         state.commit(type.LOGIN, data);
+        //     }
+        //     setTimeout(() => {
+        //         const redirect = data.$route.query.redirect || '/about';
+        //         data.$router.push({
+        //             path: redirect
+        //         })
+        //     }, 1000);
+        // },
         async login(state, data) {
             // try {
             //     let res = await login({
@@ -33,7 +51,6 @@ export default {
             //     });
             //     setTimeout(() => {
             //         const redirect = data.$route.query.redirect || '/about';
-            //         console.log(1)
             //         data.$router.replace({
             //             path: redirect
             //         })

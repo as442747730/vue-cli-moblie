@@ -3,7 +3,7 @@
         <transition :name="transitionName">
             <keep-alive>
                 <component :is="layout">
-                    <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
+                    <router-view v-if="$route.meta.keepAlive" class="router" slot="view" ></router-view>
                 </component>
             </keep-alive>
         </transition>
@@ -18,15 +18,18 @@ export default {
     name: 'app',
     data() {
         return {
-            dafault_layout: 'default'
+            // dafault_layout: 'default'
         }
     },
     computed: {
         transitionName() {
+            console.log(this.$store.state.direction, 4)
             return this.$store.state.direction
         },
         layout() {
-            return (this.$route.meta.layout || this.default_layout) + '-layout'
+            return 'default-layout'
+            // 多种布局通过路由属性控制
+            // return (this.$route.meta.layout || this.default_layout) + '-layout'
         }
     }
 };
@@ -59,7 +62,6 @@ h3 {
   height: 100%;
   height: 100vh;
   overflow: scroll;
-  position: fixed;
   overflow: hidden !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch;

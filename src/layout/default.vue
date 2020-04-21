@@ -1,12 +1,8 @@
 <template>
   <div>
-    <HeadNav />
-      <section class="section">
-        <div class="container">
-          <slot />
-        </div>
-      </section>
-    <Tabbar v-if="this.off"/>
+    <HeadNav v-show="this.Headoff" />
+    <slot name="view"/>
+    <Tabbar v-show="this.Footeoff"/>
   </div>
 </template>
 
@@ -21,22 +17,26 @@ export default {
     },
     data() {
         return {
-            off: true
+            Headoff: false,
+            Footeoff: false
         }
     },
-    props: {
-        metas: {
-            type: Object
+    watch: {
+        '$route.meta': function (newVal) {
+            if (newVal.all) {
+                this.Headoff = true
+                this.Footeoff = true
+            } else if (newVal.nohead) {
+                this.Headoff = false
+                this.Footeoff = true
+            } else if (newVal.nofoot) {
+                this.Headoff = true
+                this.Footeoff = false
+            } else if (newVal.noall) {
+                this.Headoff = false
+                this.Footeoff = false
+            }
         }
-    },
-    created() {
-        console.log(this.$route.path, 333)
-        // 通过route.path 控制底部栏显示
-        if (this.$route.path === '/about') {
-            this.off = false
-        }
-    },
-    mounted() {
     },
     methods: {
     }
