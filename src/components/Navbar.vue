@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar title="标题" left-text="绩效考核系统" left-arrow @click-left='onClickLeft'>
       <template #right>
-        <van-icon name="search" size="24" />
+        <van-icon name="search" />
       </template>
     </van-nav-bar>
   </div>

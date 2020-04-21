@@ -115,7 +115,6 @@ module.exports = {
             .set('style', '@/style')
             .set('api', '@/api')
             .set('store', '@/store')
-            .set('layouts', '@/layouts')
             .set('utils', '@/utils');
         // 压缩图片
         // config.module

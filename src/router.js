@@ -3,17 +3,18 @@ import Router from 'vue-router'
 import login from './views/login.vue'
 import store from 'store/index'
 Vue.use(Router)
+
 const router = new Router({
     mode: 'history',
     routes: [
         {
             path: '/',
             name: '/',
-            // component: login,
             redirect: '/login',
             meta: {
                 auth: false, // 是否需要登录
-                keepAlive: false // 是否缓存组件
+                keepAlive: false, // 是否缓存组件
+                index: 0
             }
         },
         {
@@ -24,7 +25,29 @@ const router = new Router({
             meta: {
                 auth: false,
                 keepAlive: false,
-                layout: 'default' // 是否展示头部导航
+                index: 1
+            }
+        },
+        {
+            path: '/achievement',
+            name: 'achievement',
+            component: () =>
+                import(/* webpackChunkName: "about" */ './views/Achievement.vue'),
+            meta: {
+                auth: false,
+                keepAlive: false,
+                index: 1
+            }
+        },
+        {
+            path: '/salary',
+            name: 'salary',
+            component: () =>
+                import(/* webpackChunkName: "about" */ './views/Salary.vue'),
+            meta: {
+                auth: false,
+                keepAlive: false,
+                index: 1
             }
         },
         {
@@ -34,7 +57,8 @@ const router = new Router({
                 import(/* webpackChunkName: "login" */ './views/login.vue'),
             meta: {
                 auth: false,
-                keepAlive: true
+                keepAlive: true,
+                index: 0
             }
         },
         {
@@ -45,7 +69,8 @@ const router = new Router({
                 // keepAlive: true
             }
         }
-    ]
+    ],
+    scrollBehavior(to, from, saveTop) { if (saveTop) { return saveTop; } else { return { x: 0, y: 0 } } }
 })
 // 记录页面跳转历史，以此判断页面左滑跳转还是右滑跳转
 const history = window.sessionStorage
