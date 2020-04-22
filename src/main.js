@@ -7,9 +7,8 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import '@babel/polyfill';
 import Es6Promise from 'es6-promise'
-import DefaultLayout from './layout/Default.vue'
 Es6Promise.polyfill()
-Vue.component('default-layout', DefaultLayout)
+
 Vue.use(Vant);
 // 注入全局过滤器
 Object.keys(filters).forEach(item => {

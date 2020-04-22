@@ -2,9 +2,7 @@
     <div id="app">
         <transition :name="transitionName">
             <keep-alive>
-                <component :is="layout">
-                    <router-view v-if="$route.meta.keepAlive" class="router" slot="view" ></router-view>
-                </component>
+                <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
             </keep-alive>
         </transition>
         <transition :name="transitionName">
@@ -18,21 +16,35 @@ export default {
     name: 'app',
     data() {
         return {
-            // dafault_layout: 'default'
+            transitionName: 'slide-right'
+        }
+    },
+    watch: {
+        '$route' (to, from) {
+            let toName = to.name
+            const toIndex = to.meta.index
+            const fromIndex = from.meta.index
+            this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
         }
     },
     computed: {
-        transitionName() {
-            console.log(this.$store.state.direction, 4)
-            return this.$store.state.direction
-        },
-        layout() {
-            return 'default-layout'
-            // 多种布局通过路由属性控制
-            // return (this.$route.meta.layout || this.default_layout) + '-layout'
-        }
+        // transitionName() {
+        //     return this.$store.state.direction
+        // }
     }
 };
+</script>
+<script>
+window.onload = function() {
+  document.addEventListener('touchstart', function(event) {
+    if (event.touches.length > 1) {
+      event.preventDefault()
+    }
+  })
+  document.addEventListener('gesturestart', function(event) {
+    event.preventDefault()
+  })
+}
 </script>
 <style lang="scss">
 @import "./node_modules/normalize.css/normalize";
