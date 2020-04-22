@@ -27,24 +27,21 @@ export default {
             this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
         }
     },
+    created() {
+        window.onload = function() {
+            document.addEventListener('touchstart', function(event) {
+                if (event.touches.length > 1) {
+                    event.preventDefault()
+                }
+            })
+            document.addEventListener('gesturestart', function(event) {
+                event.preventDefault()
+            })
+        }
+    },
     computed: {
-        // transitionName() {
-        //     return this.$store.state.direction
-        // }
     }
 };
-</script>
-<script>
-window.onload = function() {
-  document.addEventListener('touchstart', function(event) {
-    if (event.touches.length > 1) {
-      event.preventDefault()
-    }
-  })
-  document.addEventListener('gesturestart', function(event) {
-    event.preventDefault()
-  })
-}
 </script>
 <style lang="scss">
 @import "./node_modules/normalize.css/normalize";

@@ -1,15 +1,18 @@
 <template>
     <div class="about">
-        这是业绩页
+        这是工资页
+        <Gridoption/>
     </div>
 </template>
 
 <script>
+import Gridoption from 'components/Gridoption/Gridoption'
 export default {
-    name: 'Achievement',
+    name: 'Salary',
     props: {
     },
     components: {
+        Gridoption
     },
     created() {},
     computed: {}

@@ -7,6 +7,9 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import '@babel/polyfill';
 import Es6Promise from 'es6-promise'
+import eruda from 'eruda'
+// import eruda from 'eruda/eruda.min.js' // 测试工具
+eruda.init() // eruda初始化
 Es6Promise.polyfill()
 
 Vue.use(Vant);

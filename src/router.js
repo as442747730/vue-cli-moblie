@@ -20,34 +20,48 @@ const router = new Router({
             path: '/about',
             name: 'about',
             component: () =>
-                import(/* webpackChunkName: "about" */ './views/About.vue'),
+                import(/* webpackChunkName: "about" */ './views/About'),
             meta: {
                 auth: false,
                 keepAlive: false,
                 index: 1
-            }
-        },
-        {
-            path: '/achievement',
-            name: 'achievement',
-            component: () =>
-                import(/* webpackChunkName: "about" */ './views/Achievement.vue'),
-            meta: {
-                auth: false,
-                keepAlive: false,
-                index: 1
-            }
-        },
-        {
-            path: '/salary',
-            name: 'salary',
-            component: () =>
-                import(/* webpackChunkName: "about" */ './views/Salary.vue'),
-            meta: {
-                auth: false,
-                keepAlive: false,
-                index: 1
-            }
+            },
+            children: [
+                {
+                    path: 'home',
+                    name: 'home',
+                    component: () =>
+                    import('./views/About/Home'),
+                    meta: {
+                        auth: false,
+                        keepAlive: false,
+                        index: 2
+                    }
+                },
+                {
+                    path: 'salary',
+                    name: 'salary',
+                    component: () =>
+                    import('./views/About/Salary'),
+                    meta: {
+                        auth: false,
+                        keepAlive: false,
+                        index: 2
+                    }
+                },
+                {
+                    path: 'achievement',
+                    name: 'achievement',
+                    component: () =>
+                    import('./views/About/Achievement'),
+                    meta: {
+                        auth: false,
+                        keepAlive: false,
+                        index: 2
+                    }
+                }
+            ],
+            redirect: '/about/home'
         },
         {
             path: '/login',
