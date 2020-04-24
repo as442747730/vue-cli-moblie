@@ -32,11 +32,13 @@
 <script>
 import { mapActions } from 'vuex';
 import { Toast } from 'vant';
+import { getCook, setCook, removeCook } from 'utils/auth'
 export default {
     name: 'login',
     data() {
         return {
-            username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
+            username: getCook.getUserName('username') ? getCook.getUserName('username') : '',
+            // username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
             password: '',
             passwordShow: false,
             memory: true
@@ -66,8 +68,7 @@ export default {
                 this.login({
                     username: this.username,
                     password: this.password,
-                    $router: this.$router,
-                    $route: this.$route
+                    memory: this.memory
                 });
             }
         }

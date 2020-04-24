@@ -35,7 +35,6 @@
 }
 
 @mixin ell() {
-    //
     overflow: hidden;
     -ms-text-overflow: ellipsis;
     text-overflow: ellipsis;

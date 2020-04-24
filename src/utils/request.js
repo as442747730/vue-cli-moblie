@@ -192,14 +192,14 @@ export default {
         return axios.spread(func)
     },
     /* 用法
-    api.all([
-      userApi.serverPostInfo(req),
-      proveApi.powerList()
-    ]).then(api.spread(function (res1, res2) {
-      if (res1.code === 506) {
-        res1 res2分别对应上面的两个api请求
-      }
-    */
+        api.all([
+        userApi.serverPostInfo(req),
+        proveApi.powerList()
+        ]).then(api.spread(function (res1, res2) {
+        if (res1.code === 506) {
+            res1 res2分别对应上面的两个api请求
+        }
+     */
     // 判断手机类型
     judgeDevice (req, link) {
         const agent = req.req.headers['user-agent'].toLocaleLowerCase()

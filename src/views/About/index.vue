@@ -4,32 +4,38 @@
         <router-view></router-view>
         <div>
             <van-tabbar v-model="active">
-            <van-tabbar-item replace route='true' to="/about">
-                首页
-            </van-tabbar-item>
-            <van-tabbar-item replace route='true' to="/about/achievement">
-                业绩
-            </van-tabbar-item>
-            <van-tabbar-item replace route='true' to="/about/salary">
-                工资
+            <van-tabbar-item v-for='(i,j) in footsub' :key='j' replace route :to='i.path'>
+                {{i.title}}
             </van-tabbar-item>
             </van-tabbar>
         </div>
-        <!-- <Footebar></Footebar> -->
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import Navbar from 'components/Navbar/Navbar';
+import Navbar from 'components/navbar';
 export default {
     name: 'about',
     props: {
-        msg: String
     },
     data() {
         return {
-            active: 0
+            active: 0,
+            footsub: [
+                {
+                    title: '首页',
+                    path: '/about'
+                },
+                {
+                    title: '业绩',
+                    path: '/about/achievement'
+                },
+                {
+                    title: '工资',
+                    path: '/about/salary'
+                }
+            ]
         };
     },
     components: {
@@ -44,10 +50,10 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .about {
     @include ell();
+    font-size: 18px;
 }
 .aaaaa {
     height:800px;

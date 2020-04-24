@@ -6,12 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     modules: { login, index },
     state: {
-        direction: 'forward'
     },
     mutations: {
-        updateDirection (state, direction) {
-            state.direction = direction
-        }
     },
     actions: {}
 })

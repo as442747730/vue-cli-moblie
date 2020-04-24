@@ -1,18 +1,23 @@
 <template>
   <div>
-    <van-nav-bar :title="navtitle" left-text="" left-arrow @click-left='onClickLeft'>
-      <template #right v-if="plan">
-        <van-dropdown-menu>
-          <van-dropdown-item
-            v-model="officeType"
-            :options="option"
-            title=""
-            @change="switchTime"
-          />
-        </van-dropdown-menu>
-      </template>
-      <template #right v-if="results">
-          <van-icon name="notes-o" @click="checkPopup"/>
+    <van-nav-bar v-if="!searchNav" :title="navtitle" left-text="" left-arrow @click-left='onClickLeft'>
+      <template #right>
+            <div v-if="planNav == 0 ">
+                <van-dropdown-menu>
+                    <van-dropdown-item
+                        v-model="officeType"
+                        :options="option"
+                        title=""
+                        @change="switchTime"
+                    />
+                </van-dropdown-menu>
+            </div>
+            <div v-if="planNav == 1 ">
+                <van-icon name="notes-o" @click="checkPopup"/>
+            </div>
+            <div v-if="planNav == 2 ">
+                <van-icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" @click="checkOver" />
+            </div>
       </template>
     </van-nav-bar>
     <van-search
@@ -37,7 +42,16 @@
           @confirm="changeTime"
           @cancel="cancelTime"
       />
-  </van-popup>
+    </van-popup>
+    <div
+    v-show="Overshow"
+    class="wrapper"
+    @click="checkOver"
+    >
+        <van-button type="default" block @click="checkUser(1)">行员</van-button>
+        <van-button type="default" block @click="checkUser(2)">行管理</van-button>
+        <van-button type="default" block @click="checkUser(3)">行领导</van-button>
+    </div>
   </div>
 </template>
 
@@ -45,24 +59,12 @@
 export default {
     name: 'HeadNav',
     props: {
-        /* planNav 是否计划类表头 */
-        /* results 是否业绩类表头 */
-        planNav: {
-            type: Boolean, // 参数类型
-            default: false // 默认值  v-bind="对象" 可直接将对象中多个参数一次传入props
-        },
-        resultsNav: {
-            type: Boolean,
-            default: false
-        },
-        searchNav: {
-            type: Boolean,
-            default: false
-        }
     },
     data() {
         return {
             navtitle: '默认导航头部',
+            planNav: 2, /* true 计划类表头 false 业绩类表头 */
+            searchNav: false, /* searchNav 是否搜索类表头 */
             searchText: '',
             officeType: -1,
             option: [
@@ -70,7 +72,8 @@ export default {
                 { text: '季度计划', value: 1 },
                 { text: '年度计划', value: 2 }
             ],
-            timeShow: false,
+            Overshow: false, // 行员切换控件
+            timeShow: false, // 时间切换控件
             minDate: new Date(1990, 1, 1),
             maxDate: new Date(2030, 1, 1),
             currentDate: new Date()
@@ -97,6 +100,11 @@ export default {
                 this.timeShow = false;
             }
         },
+        checkOver() {
+            this.Overshow = !this.Overshow
+        },
+        checkUser(type) {
+        },
         formatter(type, value) {
             if (type === 'year') {
                 return `${value}年`;
@@ -108,7 +116,6 @@ export default {
             return value;
         },
         changeTime(value) {
-            console.log(value)
             this.timeShow = false;
         },
         cancelTime() {
@@ -124,4 +131,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.wrapper {
+    position: absolute;
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
+    top: 40%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    background-color: #000;
+    z-index: 20;
+}
 </style>
