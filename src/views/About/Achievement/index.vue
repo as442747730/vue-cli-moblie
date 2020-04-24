@@ -5,15 +5,18 @@
             <van-grid-item icon="photo-o" text="业绩排行榜" />
         </van-grid>
         这是业绩页
+        <LineChart />
     </div>
 </template>
 
 <script>
+import LineChart from 'components/lineChart'
 export default {
     name: 'Achievement',
     props: {
     },
     components: {
+        LineChart
     },
     created() {},
     computed: {}

@@ -1,6 +1,9 @@
 <template>
   <section class="login">
-    <div class="top">您好，请登录</div>
+    <div class="top">
+      <div class="logo"></div>
+      <div class="title">分布式绩效管理系统</div>
+    </div>
     <div class="list">
         <van-field
           class="usern"
@@ -78,13 +81,54 @@ export default {
 <style scoped lang="scss">
 .login {
   .top {
-    @include line-height(220px, 220px);
-    font-size: 20px;
-    padding-left: 45px;
-    text-align: left;
+    height: 240px;
+    padding-top: 100px;
+    box-sizing: border-box;
+    .logo {
+      width: 170px;
+      height: 40px;
+      margin: 0 auto;
+      background: url('~assets/img/loginLogo@2x.png') no-repeat center/contain;
+    }
+    .title {
+      width:170px;
+      height:26px;
+      padding-top: 10px;
+      margin: 0 auto;
+      font-size:18px;
+      line-height:24px;
+      color:rgba(210,60,8,1);
+    }
   }
   .list {
-    margin: 0 45px 8px 45px;
+    margin: 0 38px;
+    /deep/ .van-cell {
+      width:300px;
+      height:46px;
+      padding: 10px 16px 12px 16px;
+      background:rgba(246,246,246,1);
+      .van-field__body {
+        input::-webkit-input-placeholder {
+          /* WebKit browsers */
+          color: #FF782D;
+        }
+        input:-moz-placeholder {
+          /* Mozilla Firefox 4 to 18 */
+          color: #FF782D;
+        }
+        input::-moz-placeholder {
+          /* Mozilla Firefox 19+ */
+          color: #FF782D;
+        }
+        input::-ms-input-placeholder {
+          /* Internet Explorer 10+ */
+          color: #FF782D;
+        }
+      }
+    }
+    .usern {
+      margin-bottom: 10px;
+    }
   }
   .list2 {
     margin: 8px 0 0 16px;
