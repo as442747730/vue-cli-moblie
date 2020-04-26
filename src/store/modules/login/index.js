@@ -11,22 +11,17 @@ export default {
     mutations: {
 
         [type.LOGIN](state, data) {
-            let userDate = data.data;
-            state.token = userDate.token;
-            state.user = userDate;
-            setCook.getToken('token', userDate.token)
-            setCook.getUserDate('userDate', JSON.stringify(userDate))
+            state.token = data.password
+            state.user = data.username
+            /* 通过cook存储 */
+            // let userDate = data.data;
+            // state.token = userDate.token;
+            // state.user = userDate;
+            // setCook.setToken('token', userDate.token)
+            // setCook.setUserDate('userDate', JSON.stringify(userDate))
+            /* 通过loca存储 */
             // localStorage.setItem('token', userDate.token)
             // localStorage.setItem('userDate', JSON.stringify(userDate))
-            setTimeout(() => {
-                if (data.memory) {
-                    setCook.setUserName('username', data.username)
-                }
-                const redirect = '/about';
-                data.$router.push({
-                    path: redirect
-                })
-            }, 1000);
         }
 
     },
@@ -42,6 +37,16 @@ export default {
             // if (code === 200) {
             //     state.commit(type.LOGIN, data);
             // }
+            setTimeout(() => {
+                if (res.memory) {
+                    setCook.setUserName('username', res.username)
+                }
+                const redirect = '/about';
+                console.log(res, 11111111111111111)
+                res.$router.push({
+                    path: redirect
+                })
+            }, 1000);
         }
     },
     getters: {

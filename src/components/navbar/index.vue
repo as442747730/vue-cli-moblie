@@ -63,7 +63,7 @@ export default {
     data() {
         return {
             navtitle: '默认导航头部',
-            planNav: 2, /* true 计划类表头 false 业绩类表头 */
+            planNav: 1, /* true 计划类表头 false 业绩类表头 */
             searchNav: false, /* searchNav 是否搜索类表头 */
             searchText: '',
             officeType: -1,

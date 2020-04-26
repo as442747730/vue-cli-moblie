@@ -50,12 +50,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .about {
     @include ell();
     font-size: 18px;
-}
-.aaaaa {
-    height:800px;
 }
 </style>

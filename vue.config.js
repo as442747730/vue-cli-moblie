@@ -42,7 +42,8 @@ module.exports = {
     transpileDependencies: ['webpack-dev-server/client'],
     // 项目部署的基础路径 默认/
     // 放在子目录时使用./或者加你的域名
-    publicPath: process.env.BASE_URL,
+    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+    // publicPath: process.env.BASE_URL,
     outputDir: 'dist',
     assetsDir: 'static', // 相对于outputDir的静态资源(js、css、img、fonts)目录
     indexPath: 'index.html',
@@ -99,6 +100,10 @@ module.exports = {
         //     }
         //     return args
         // })
+        config.plugin('define').tap(args => {
+            args[0]['process.env'].BASE_URL = JSON.stringify(process.env.BASE_URL);
+            return args;
+        });
         config.entry.app = ['babel-polyfill', './src/main.js'];
         // 修复HMR
         config.resolve.symlinks(true);
@@ -117,21 +122,29 @@ module.exports = {
             .set('store', '@/store')
             .set('utils', '@/utils');
         // 压缩图片
-        // config.module
-        //     .rule('images')
-        //     .use('image-webpack-loader')
-        //     .loader('image-webpack-loader')
-        //     .options({
-        //         mozjpeg: { progressive: true, quality: 65 },
-        //         optipng: { enabled: false },
-        //         pngquant: { quality: '65-90', speed: 4 },
-        //         gifsicle: { interlaced: false },
-        //         webp: { quality: 75 }
-        //     });
+        config.module
+            .rule('images')
+            .use('image-webpack-loader')
+            .loader('image-webpack-loader')
+            .options({
+                mozjpeg: { progressive: true, quality: 65 },
+                optipng: { enabled: false },
+                pngquant: { quality: [0.90, 0.95], speed: 4 },
+                gifsicle: { interlaced: false },
+                webp: { quality: 75 }
+            });
+        // mozjpeg — 压缩JPEG图像
+        // optipng — 压缩PNG图像
+        // pngquant — 压缩PNG图像
+        // svgo — 压缩SVG图像
+        // gifsicle — 压缩GIF图像
+        // 和可选的优化器
+        // webp —将JPG和PNG图像压缩为WEBP
+        /* https://www.npmjs.com/package/image-webpack-loader */
     },
     css: {
         // 是否使用css分离插件 ExtractTextPlugin
-        extract: !!isProduction,
+        extract: true,
         // 开启 CSS source maps?
         sourceMap: false,
         // css预设器配置项
@@ -154,7 +167,7 @@ module.exports = {
                 ]
             },
             sass: {
-                data: '@import "style/_mixin.scss";@import "style/_variables.scss";' // 全局引入
+                data: '@import "style/_mixin.scss";@import "style/_variables.scss";@import "style/_reset.scss";' // 全局引入
             }
         }
     },

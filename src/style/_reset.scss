@@ -5,15 +5,20 @@ html {
   color: #000;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%
+  -ms-text-size-adjust: 100%;
 }
-html,body{ width: 100%; height: 100%; overflow: scroll;}
-html::-webkit-scrollbar, body::-webkit-scrollbar{width:0px;height:0px;}
+html,body{ 
+  width: 100%; 
+  height: 100%; 
+  overflow: scroll;
+  // -webkit-user-select: none;   /* 禁止选中文本（如无文本选中需求，此为必选项） */
+  // user-select: none;
+}
 body{margin:0;}
 html * {
   outline: 0;
   -webkit-text-size-adjust: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body,
@@ -56,9 +61,11 @@ nav,
 section {
   margin: 0;
   padding: 0;
-  color: #523
+  color: #523;
 }
-
+img {
+  -webkit-touch-callout: none;
+}
 body {
   font-family: "PingFangSC", "helvetica", "Source Han Sans SC", "robot", "Medium", "regular";
 }
@@ -76,22 +83,22 @@ li {
 
 table {
   border-collapse: collapse;
-  border-spacing: 0
+  border-spacing: 0;
 }
 
 fieldset,
 img {
-  border: 0
+  border: 0;
 }
 
 abbr,
 acronym {
   border: 0;
-  font-variant: normal
+  font-variant: normal;
 }
 
 del {
-  text-decoration: line-through
+  text-decoration: line-through;
 }
 
 address,
@@ -103,17 +110,17 @@ em,
 th,
 var {
   font-style: normal;
-  font-weight: 500
+  font-weight: 500;
 }
 
 ol,
 ul {
-  list-style: none
+  list-style: none;
 }
 
 caption,
 th {
-  text-align: left
+  text-align: left;
 }
 
 h1,
@@ -123,12 +130,12 @@ h4,
 h5,
 h6 {
   font-size: 100%;
-  font-weight: 500
+  font-weight: 500;
 }
 
 q:before,
 q:after {
-  content: ''
+  content: '';
 }
 
 sub,
@@ -136,28 +143,28 @@ sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
-  vertical-align: baseline
+  vertical-align: baseline;
 }
 
 sup {
-  top: -.5em
+  top: -.5em;
 }
 
 sub {
-  bottom: -.25em
+  bottom: -.25em;
 }
 
 a:hover {
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 ins,
 a {
-  text-decoration: none
+  text-decoration: none;
 }
 
 input {
   border: none;
   -webkit-appearance: none;
-  outline: none
+  outline: none;
 }

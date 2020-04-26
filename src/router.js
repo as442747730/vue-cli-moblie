@@ -4,7 +4,7 @@ import store from 'store/index'
 Vue.use(Router)
 
 const router = new Router({
-    mode: 'history',
+    mode: 'hash',
     routes: [
         {
             path: '/',
@@ -22,7 +22,7 @@ const router = new Router({
             component: () =>
                 import(/* webpackChunkName: "about" */ './views/About'),
             meta: {
-                auth: false,
+                auth: true,
                 keepAlive: false,
                 index: 1
             },
@@ -33,7 +33,7 @@ const router = new Router({
                     component: () =>
                     import('./views/About/Home'),
                     meta: {
-                        auth: false,
+                        auth: true,
                         keepAlive: false,
                         index: 2
                     }
@@ -44,7 +44,7 @@ const router = new Router({
                     component: () =>
                     import('./views/About/Salary'),
                     meta: {
-                        auth: false,
+                        auth: true,
                         keepAlive: false,
                         index: 2
                     }
@@ -55,7 +55,7 @@ const router = new Router({
                     component: () =>
                     import('./views/About/Achievement'),
                     meta: {
-                        auth: false,
+                        auth: true,
                         keepAlive: false,
                         index: 2
                     }
@@ -69,7 +69,7 @@ const router = new Router({
             component: () =>
                 import('./views/Finance'),
             meta: {
-                auth: false,
+                auth: true,
                 keepAlive: false,
                 index: 1
             }

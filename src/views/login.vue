@@ -71,7 +71,9 @@ export default {
                 this.login({
                     username: this.username,
                     password: this.password,
-                    memory: this.memory
+                    memory: this.memory,
+                    $router: this.$router,
+                    $route: this.$route
                 });
             }
         }

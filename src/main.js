@@ -13,7 +13,6 @@ import 'vant/lib/index.css';
 import '@babel/polyfill';
 eruda.init() // eruda初始化
 Es6Promise.polyfill()
-
 Vue.use(Vant);
 // 注入全局过滤器
 Object.keys(filters).forEach(item => {
