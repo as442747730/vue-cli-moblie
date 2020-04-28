@@ -42,7 +42,6 @@ export default {
                     setCook.setUserName('username', res.username)
                 }
                 const redirect = '/about';
-                console.log(res, 11111111111111111)
                 res.$router.push({
                     path: redirect
                 })

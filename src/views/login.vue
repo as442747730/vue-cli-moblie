@@ -22,12 +22,13 @@
           @click-right-icon ="onClickIcon"
           clearable
         />
-      <div class="list2">
+      <!-- <div class="list2">
         <van-checkbox v-model="memory" >记住账号</van-checkbox>
-      </div>
+      </div> -->
       <div>
-        <van-button @click="loginBtn" :disabled="disabledtype" color="#f57a00" size="normal" clearable >登录</van-button>
+        <van-button @click="loginBtn" :disabled="disabledtype" color="#f57a00" size="normal" clearable block round>登录</van-button>
       </div>
+      <div class="ftlogo"></div>
     </div>
   </section>
 </template>
@@ -105,7 +106,6 @@ export default {
   .list {
     margin: 0 38px;
     /deep/ .van-cell {
-      width:300px;
       height:46px;
       padding: 10px 16px 12px 16px;
       background:rgba(246,246,246,1);
