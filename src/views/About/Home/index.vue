@@ -1,28 +1,28 @@
 <template>
-    <div class="about">
-        <div>搜索导航栏</div>
-        <FinanceInfo></FinanceInfo>
-        <Gridoption></Gridoption>
-        <Infocontent></Infocontent>
-    </div>
+  <div class="about">
+    <div>搜索导航栏</div>
+    <FinanceInfo />
+    <Gridoption />
+    <Infocontent />
+  </div>
 </template>
 
 <script>
 import Gridoption from 'components/gridoption'
 import FinanceInfo from 'components/financeInfo'
-import Infocontent from 'components/infocontent';
+import Infocontent from 'components/infocontent'
 export default {
-    name: 'Home',
-    props: {
-    },
-    components: {
-        Gridoption,
-        FinanceInfo,
-        Infocontent
-    },
-    created() {},
-    computed: {}
-};
+  name: 'Home',
+  components: {
+    Gridoption,
+    FinanceInfo,
+    Infocontent
+  },
+  props: {
+  },
+  computed: {},
+  created () {}
+}
 </script>
 
 <style scoped lang="scss">

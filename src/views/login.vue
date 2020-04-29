@@ -1,85 +1,85 @@
 <template>
   <section class="login">
     <div class="top">
-      <div class="logo"></div>
+      <div class="logo" />
       <div class="title">分布式绩效管理系统</div>
     </div>
     <div class="list">
-        <van-field
-          class="usern"
-          v-model="username"
-          left-icon="contact"
-          placeholder="请输入账号"
-          clearable
-        />
-        <van-field
-          class="usern"
-          v-model="password"
-          :type="passwordShow ? '' : 'password'"
-          placeholder="请输入密码"
-          left-icon="bag-o"
-          :right-icon="passwordShow ? 'closed-eye' : 'eye-o' "
-          @click-right-icon ="onClickIcon"
-          clearable
-        />
+      <van-field
+        v-model="username"
+        class="usern"
+        left-icon="contact"
+        placeholder="请输入账号"
+        clearable
+      />
+      <van-field
+        v-model="password"
+        class="usern"
+        :type="passwordShow ? '' : 'password'"
+        placeholder="请输入密码"
+        left-icon="bag-o"
+        :right-icon="passwordShow ? 'closed-eye' : 'eye-o' "
+        clearable
+        @click-right-icon="onClickIcon"
+      />
       <!-- <div class="list2">
         <van-checkbox v-model="memory" >记住账号</van-checkbox>
       </div> -->
       <div>
-        <van-button @click="loginBtn" :disabled="disabledtype" color="#f57a00" size="normal" clearable block round>登录</van-button>
+        <van-button :disabled="disabledtype" color="#f57a00" size="normal" clearable block round @click="loginBtn">登录</van-button>
       </div>
-      <div class="ftlogo"></div>
+      <div class="ftlogo" />
     </div>
   </section>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import { Toast } from 'vant';
+import { mapActions } from 'vuex'
+import { Toast } from 'vant'
 import { getCook, setCook, removeCook } from 'utils/auth'
 export default {
-    name: 'login',
-    data() {
-        return {
-            username: getCook.getUserName('username') ? getCook.getUserName('username') : '',
-            // username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
-            password: '',
-            passwordShow: false,
-            memory: true
-        };
-    },
-    components: {},
-    created() {},
-    mounted() {},
-    computed: {
-        disabledtype () {
-            return this.username === '' || this.password === ''
-        }
-    },
-    methods: {
-        ...mapActions('login', ['login']),
-        onClickIcon() {
-            this.passwordShow = !this.passwordShow
-        },
-        loginBtn() {
-            if (this.username === '' || this.password === '') {
-                Toast({
-                    message: '请输入账号或密码',
-                    position: 'middle',
-                    duration: 2000
-                });
-            } else {
-                this.login({
-                    username: this.username,
-                    password: this.password,
-                    memory: this.memory,
-                    $router: this.$router,
-                    $route: this.$route
-                });
-            }
-        }
+  name: 'Login',
+  components: {},
+  data () {
+    return {
+      username: getCook.getUserName('username') ? getCook.getUserName('username') : '',
+      // username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
+      password: '',
+      passwordShow: false,
+      memory: true
     }
-};
+  },
+  computed: {
+    disabledtype () {
+      return this.username === '' || this.password === ''
+    }
+  },
+  created () {},
+  mounted () {},
+  methods: {
+    ...mapActions('login', ['login']),
+    onClickIcon () {
+      this.passwordShow = !this.passwordShow
+    },
+    loginBtn () {
+      if (this.username === '' || this.password === '') {
+        Toast({
+          message: '请输入账号或密码',
+          position: 'middle',
+          duration: 2000
+        })
+      } else {
+        this.login({
+          username: this.username,
+          password: this.password,
+          memory: this.memory,
+          $router: this.$router,
+          $route: this.$route
+        })
+      }
+    }
+  }
+}
 </script>
 <style scoped lang="scss">
 .login {

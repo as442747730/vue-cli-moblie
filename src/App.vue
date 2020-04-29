@@ -1,47 +1,46 @@
 <template>
-    <div id="app">
-        <transition :name="transitionName">
-            <keep-alive>
-                <router-view v-if="$route.meta.keepAlive" class="router"></router-view>
-            </keep-alive>
-        </transition>
-        <transition :name="transitionName">
-            <router-view v-if="!$route.meta.keepAlive" class="router"></router-view>
-        </transition>
-    </div>
+  <div id="app">
+    <transition :name="transitionName">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive" class="router" />
+      </keep-alive>
+    </transition>
+    <transition :name="transitionName">
+      <router-view v-if="!$route.meta.keepAlive" class="router" />
+    </transition>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'app',
-    data() {
-        return {
-            transitionName: 'slide-right'
-        }
-    },
-    watch: {
-        '$route' (to, from) {
-            let toName = to.name
-            const toIndex = to.meta.index
-            const fromIndex = from.meta.index
-            this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
-        }
-    },
-    created() {
-        window.onload = function() {
-            document.addEventListener('touchstart', function(event) {
-                if (event.touches.length > 1) {
-                    event.preventDefault()
-                }
-            })
-            document.addEventListener('gesturestart', function(event) {
-                event.preventDefault()
-            })
-        }
-    },
-    computed: {
+  name: 'App',
+  data () {
+    return {
+      transitionName: 'slide-right'
     }
-};
+  },
+  computed: {
+  },
+  watch: {
+    '$route' (to, from) {
+      const toIndex = to.meta.index
+      const fromIndex = from.meta.index
+      this.transitionName = toIndex < fromIndex ? 'slide-right' : 'slide-left'
+    }
+  },
+  created () {
+    window.onload = function () {
+      document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+          event.preventDefault()
+        }
+      })
+      document.addEventListener('gesturestart', function (event) {
+        event.preventDefault()
+      })
+    }
+  }
+}
 </script>
 <style lang="scss">
 @import "./node_modules/normalize.css/normalize";

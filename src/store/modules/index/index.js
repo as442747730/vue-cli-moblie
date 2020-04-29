@@ -1,13 +1,13 @@
 export default {
-    namespaced: true,
-    data: {
-    },
-    mutations: {
+  namespaced: true,
+  data: {
+  },
+  mutations: {
 
-    },
-    actions: {
-    },
-    getters: {
-    }
+  },
+  actions: {
+  },
+  getters: {
+  }
 
 }
