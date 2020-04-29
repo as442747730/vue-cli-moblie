@@ -1,6 +1,6 @@
-import { asyncRoutes, constantRoutes } from '@/router'
-import { getRoutes } from '@/api/user'
-import Layout from '@/layout'
+import { asyncRoutes, constantRoutes } from 'router'
+// import { getRoutes } from 'api/user'
+import { UsersApi } from 'api/users'
 const _import = require('router/_import_' + process.env.NODE_ENV)
 /**
  * Use meta.role to determine if the current user has permission
@@ -39,13 +39,13 @@ export function filterAsyncRoutes (routes, roles) {
 function filterAsyncRouter (asyncRouterMap) {
   const accessedRouters = asyncRouterMap.filter(route => {
     if (route.component) {
-      if (route.component === 'Layout') {
-        route.component = Layout
-      } else {
-        route.component = _import(route.component) // 导入组件
-        // route.component = () => import(route.component)
-        // route.component = require(route.component).default
-      }
+      // if (route.component === 'Layout') {
+      //   route.component = Layout
+      // } else {
+      route.component = _import(route.component) // 导入组件
+      // route.component = () => import(route.component)
+      // route.component = require(route.component).default
+      // }
     }
     if (route.children && route.children.length) {
       route.children = filterAsyncRouter(route.children)
@@ -91,13 +91,13 @@ const actions = {
     // let { empCode, roleCode } = data
     return new Promise((resolve, reject) => {
       // getRoutes(empCode, roleCode)
-      getRoutes(data)
+      UsersApi.getRoutes(data)
         .then(async (res) => {
           console.log('2菜单getRoutes')
           console.log(res)
           await dispatch('user/setMenus', res.data.data.children, { root: true })
-          // console.log('state.user.menus')
-          // console.log(state.user.menus)
+          console.log('state.user.menus')
+          console.log(state.user.menus)
           resolve(res)
         })
         .catch(error => {

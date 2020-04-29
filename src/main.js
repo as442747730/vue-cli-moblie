@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router/router'
-import store from './store/index'
+import router from 'router'
+import store from './store'
 import filters from './utils/filterstime'
 import Vant from 'vant'
 import VeLing from 'v-charts/lib/line.common'
@@ -11,6 +11,7 @@ import Es6Promise from 'es6-promise'
 import eruda from 'eruda' // 测试工具
 import 'vant/lib/index.css'
 import '@babel/polyfill'
+import '@/permission'
 eruda.init() // eruda初始化
 Es6Promise.polyfill()
 Vue.use(Vant)

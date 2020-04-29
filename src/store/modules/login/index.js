@@ -1,12 +1,12 @@
 import * as type from './mutations_types'
-import { UsersApi } from 'api/users'
-import { getCook, setCook, isJSON } from 'utils/auth'
+// import { UsersApi } from 'api/users'
+// import { getCook, setCook, isJSON } from 'utils/auth'
 // import { Toast } from 'vant';
 export default {
   namespaced: true,
   state: {
-    token: getCook.getToken('token') || '',
-    user: isJSON(getCook.getToken('userDate')) ? JSON.parse(getCook.getToken('userDate')) : {}
+    // token: getCook.getToken('token') || '',
+    // user: isJSON(getCook.getToken('userDate')) ? JSON.parse(getCook.getToken('userDate')) : {}
   },
   mutations: {
 
@@ -38,9 +38,9 @@ export default {
       //     state.commit(type.LOGIN, data);
       // }
       setTimeout(() => {
-        if (res.memory) {
-          setCook.setUserName('username', res.username)
-        }
+        // if (res.memory) {
+        //   setCook.setUserName('username', res.username)
+        // }
         const redirect = '/about'
         res.$router.push({
           path: redirect

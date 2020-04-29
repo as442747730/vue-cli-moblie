@@ -1,8 +1,8 @@
 <template>
   <div class="wrap">
     <van-row>
-      <van-col span="12">{{financeType}}</van-col>
-      <van-col span="12"></van-col>
+      <van-col span="12">{{ financeType }}</van-col>
+      <van-col span="12" />
       <!-- <van-col span="8">span: 8</van-col> -->
     </van-row>
     <van-row>
@@ -18,23 +18,23 @@
 
 <script>
 export default {
-    name: '',
-    props: {
-        financeType: {
-            type: String,
-            default: '存款'
-        }
-    },
-    data() {
-        return {
-        };
-    },
-    computed: {
-    },
-    watch: {
-    },
-    methods: {}
-};
+  name: '',
+  props: {
+    financeType: {
+      type: String,
+      default: '存款'
+    }
+  },
+  data () {
+    return {
+    }
+  },
+  computed: {
+  },
+  watch: {
+  },
+  methods: {}
+}
 </script>
 
 <style lang='scss' scoped>

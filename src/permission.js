@@ -1,9 +1,10 @@
-import router from './router'
+import router from 'router'
 // import { asyncRoutes } from './router'
-import store from './store'
-import { Message } from 'element-ui'
-import { getToken } from '@/utils/auth' // get token from cookie
-import getPageTitle from '@/utils/get-page-title'
+import store from 'store'
+// import { Message } from 'element-ui'
+import { Notify } from 'vant'
+import { getToken } from 'utils/auth' // get token from cookie
+// import getPageTitle from '@/utils/get-page-title'
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 // const _import = require('./router/_import_' + process.env.NODE_ENV)
@@ -11,25 +12,17 @@ const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 // const _import = require('./router/_import_production')
 router.beforeEach(async (to, from, next) => {
   // set page title
-  document.title = getPageTitle(to.meta.title)
-
+  // document.title = getPageTitle(to.meta.title)
   // determine whether the user has logged in
   const hasToken = getToken()
-  console.log('from.path ')
-  console.log(from.path)
-  console.log('to.path ')
-  console.log(to.path)
   let path = to.path
   let newPath = path.substr(4)
-  // console.log('to.newPath')
-  // console.log(newPath)
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
       // console.log('hasToken 1')
       next({ path: '/' })
     } else {
-      // console.log(1)
       if (store.getters.permission_routes.length > 0) { // 当已经有菜单时直接跳转页面
         // console.log(2)
         if (path.indexOf('pms') === -1) {
@@ -59,7 +52,7 @@ router.beforeEach(async (to, from, next) => {
           // menus.push({ path: '*', redirect: '/404', hidden: true })// 404页面需要动态加载，否则刷新会跳去404页面
           console.log(4)
           router.addRoutes(store.getters.accessedRouters) // 2.动态添加路由
-          global.antRouter = store.getters.accessedRouters // 3.将路由数据传递给全局变量，做侧边栏菜单渲染工作
+          //global .antRouter = store.getters.accessedRouters  3.将路由数据传递给全局变量，做侧边栏菜单渲染工作
           // console.log(3)
           if (path.indexOf('pms') === -1) {
             // console.log('path no pms')
@@ -83,7 +76,7 @@ router.beforeEach(async (to, from, next) => {
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
+          Notify({ type: 'warning', message: error || 'Has Error' })
           console.log(4)
           next(`/login?redirect=${to.path}`)
         }

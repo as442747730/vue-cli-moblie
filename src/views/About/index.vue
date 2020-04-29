@@ -41,11 +41,13 @@ export default {
       ]
     }
   },
-  created () {},
   computed: {
     // vuex modules 中的gettes,state获取方式，modules中要定义namespaced: true
     // ...mapGetters('login',['user','token']),
     ...mapState('login', ['user', 'token'])
+  },
+  created () {
+    console.log(this.$route, 888)
   }
 }
 </script>

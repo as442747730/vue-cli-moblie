@@ -5,77 +5,94 @@
       <div class="title">分布式绩效管理系统</div>
     </div>
     <div class="list">
-      <van-field
-        v-model="username"
-        class="usern"
-        left-icon="contact"
-        placeholder="请输入账号"
-        clearable
-      />
-      <van-field
-        v-model="password"
-        class="usern"
-        :type="passwordShow ? '' : 'password'"
-        placeholder="请输入密码"
-        left-icon="bag-o"
-        :right-icon="passwordShow ? 'closed-eye' : 'eye-o' "
-        clearable
-        @click-right-icon="onClickIcon"
-      />
+      <van-form>
+        <van-field
+          v-model="loginForm.username"
+          class="usern"
+          name="validateUsername"
+          left-icon="contact"
+          placeholder="请输入账号"
+          clearable
+        />
+        <van-field
+          v-model="loginForm.password"
+          class="usern"
+          name="validatePassword"
+          :type="passwordShow ? '' : 'password'"
+          placeholder="请输入密码"
+          left-icon="bag-o"
+          :right-icon="passwordShow ? 'closed-eye' : 'eye-o' "
+          clearable
+          @click-right-icon="onClickIcon"
+        />
+        <div>
+          <van-button :disabled="disabledtype" color="#f57a00" size="normal" clearable block round @click="loginBtn">登录</van-button>
+        </div>
+      </van-form>
       <!-- <div class="list2">
         <van-checkbox v-model="memory" >记住账号</van-checkbox>
       </div> -->
-      <div>
-        <van-button :disabled="disabledtype" color="#f57a00" size="normal" clearable block round @click="loginBtn">登录</van-button>
-      </div>
       <div class="ftlogo" />
     </div>
   </section>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { validUsername } from '@/utils/validate'
+// import { setRoleCode, setRoleName, setCorpDb, setSysdate } from '@/utils/auth'
+// import { getRoleList } from '@/api/user'
 import { Toast } from 'vant'
-import { getCook, setCook, removeCook } from 'utils/auth'
 export default {
   name: 'Login',
   components: {},
   data () {
     return {
-      username: getCook.getUserName('username') ? getCook.getUserName('username') : '',
-      // username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
-      password: '',
-      passwordShow: false,
-      memory: true
+      loginForm: {
+        username: 'gzadmin',
+        password: '123456'
+      },
+      passwordShow: false
     }
   },
   computed: {
     disabledtype () {
-      return this.username === '' || this.password === ''
+      return this.loginForm.username === '' || this.loginForm.password === ''
     }
   },
   created () {},
   mounted () {},
   methods: {
-    ...mapActions('login', ['login']),
     onClickIcon () {
       this.passwordShow = !this.passwordShow
     },
     loginBtn () {
-      if (this.username === '' || this.password === '') {
-        Toast({
-          message: '请输入账号或密码',
-          position: 'middle',
-          duration: 2000
-        })
+      let that = this
+      if (
+        !validUsername(this.loginForm.username) &&
+        this.loginForm.password < 6
+      ) {
+        Toast.fail('请输入正确账号或密码')
       } else {
-        this.login({
-          username: this.username,
-          password: this.password,
-          memory: this.memory,
-          $router: this.$router,
-          $route: this.$route
-        })
+        console.log(this.$store, 2)
+        this.$store
+          .dispatch('user/login', this.loginForm)
+          .then(response => {
+            if (that.corps.length === 1) {
+              that.corpSelect(that.corps[0].corpDb)
+            } else {
+              that.dialogVisibleCorp = true
+            }
+          })
+          .catch(() => {
+            this.loading = false
+          })
+        // this.login({
+        //   username: this.username,
+        //   password: this.password,
+        //   memory: this.memory,
+        //   $router: this.$router,
+        //   $route: this.$route
+        // })
       }
     }
   }

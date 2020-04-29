@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev:mock": "vue-cli-service serve --open --mode mock"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -33,6 +34,7 @@
     "compression-webpack-plugin": "^2.0.0",
     "eruda": "^2.2.2",
     "es6-promise": "^4.2.8",
+    "mockjs": "1.0.1-beta3",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "image-webpack-loader": "^6.0.0",
