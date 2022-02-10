@@ -37,7 +37,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "image-webpack-loader": "^6.0.0",
     "lib-flexible": "^0.3.2",
-    "node-sass": "^4.9.0",
+    "node-sass": "^7.0.0",
     "qs": "^6.7.0",
     "sass-loader": "^7.1.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
